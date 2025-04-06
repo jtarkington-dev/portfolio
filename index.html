@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeremy Tarkington – AI Dev & Full Stack Engineer</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="homepage">
+    <div class="page-wrapper">
+        <div class="center-container">
+            <h1 class="hero-title">Jeremy Tarkington</h1>
+            <p class="hero-subtitle">AI Developer · Automation Architect · Full Stack Strategist</p>
+
+            <nav class="hero-nav">
+                <a href="about.html" class="nav-btn">About Me</a>
+                <a href="projects.html" class="nav-btn">Projects</a>
+                <a href="contact.html" class="nav-btn">Contact</a>
+            </nav>
+        </div>
+
+        <div class="task-widget">
+            <h3>Task Tracker Widget</h3>
+            <form id="task-form">
+                <input type="text" id="task-input" placeholder="Enter a task..." required />
+                <button type="submit">Add Task</button>
+            </form>
+            <ul id="task-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const contactBtn = document.querySelector('a[href="contact.html"]');
+            const popup = document.getElementById("contact-popup");
+            const closeBtn = document.getElementById("close-popup");
+
+            contactBtn.addEventListener("click", function (e) {
+                e.preventDefault(); // Prevent navigation
+                popup.style.display = "flex"; // Show popup
+            });
+
+            closeBtn.addEventListener("click", function () {
+                popup.style.display = "none"; // Hide popup
+            });
+
+            // Optional: Hide popup when clicking outside of card
+            popup.addEventListener("click", function (e) {
+                if (e.target === popup) {
+                    popup.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+
+    <div id="contact-popup" class="popup-overlay">
+        <div class="popup-card">
+            <span class="close-btn" id="close-popup">&times;</span>
+            <h3>Contact Me</h3>
+            <p>Email: <a href="mailto:jtarkington.dev@gmail.com">jtarkington.dev@gmail.com</a></p>
+            <p>GitHub: <a href="https://github.com/jtarkington-dev" target="_blank">jtarkington-dev</a></p>
+            <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></p> <!-- Update later -->
+            <p>Phone: <a href="tel:3375158618">337-515-8618</a></p>
+        </div>
+    </div>
+
+
+    <script src="task-widget/script.js"></script>
+</body>
+
+</html>

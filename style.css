@@ -1,0 +1,314 @@
+/* HOMEPAGE STYLES */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Keep content top-aligned but centered horizontally */
+    background: radial-gradient(circle, #111 0%, #000 100%);
+    color: #00ffe1;
+}
+
+
+
+.center-container {
+    text-align: center;
+    padding: 40px;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    white-space: nowrap;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+.hero-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-btn {
+    padding: 12px 20px;
+    background-color: #00ffe1;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00ffe1;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #0ff;
+    box-shadow: 0 0 20px #00ffe1, 0 0 10px #0ff;
+    transform: scale(1.05);
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding-bottom: 80px;
+}
+
+
+/* -------------------------------------------------- */
+/*  Task Widget Styles - Embedded Component         */
+/* -------------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.task-widget {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto 0 auto;
+    /* Top spacing added */
+}
+
+
+#task-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#task-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #2a2a2a;
+    color: #eaeaea;
+}
+
+#task-input::placeholder {
+    color: #888;
+}
+
+#task-form button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00ffe1;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#task-form button:hover {
+    background-color: #00d9c1;
+}
+
+#task-list {
+    margin-top: 20px;
+    list-style: none;
+}
+
+#task-list li {
+    background-color: #2a2a2a;
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #eaeaea;
+}
+
+#task-list li.done {
+    text-decoration: line-through;
+    opacity: 0.8;
+    color: #ff4f4f;
+}
+
+.delete-btn {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #ff4f4f;
+    font-size: 1.1rem;
+}
+
+.delete-btn:hover {
+    color: #ff1a1a;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* -------- Project Page Styles -------- */
+
+body.projects-page {
+    background: linear-gradient(to bottom, #0f0f0f, #000);
+    color: #eaeaea;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px 20px;
+}
+
+.page-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #00ffe1;
+}
+
+.page-description {
+    text-align: center;
+    margin-bottom: 50px;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+.project-list {
+    display: grid;
+    gap: 30px;
+}
+
+.project-card {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    color: #00ffe1;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.project-card p {
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.project-links a {
+    display: inline-block;
+    margin-right: 15px;
+    color: #00ffe1;
+    text-decoration: none;
+
+}
+
+/* --------------------------------------- */
+/* Contact Popup Styles                 */
+/* --------------------------------------- */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-card {
+    background-color: #1a1a1a;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    color: #eaeaea;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: popupFadeIn 0.3s ease forwards;
+    text-align: left;
+}
+
+.popup-card h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.popup-card p {
+    margin: 10px 0;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-card a {
+    color: #00ffe1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.popup-card a:hover {
+    text-decoration: underline;
+}
+
+.popup-card {
+    /* existing styles... */
+    transform: scale(0.95);
+    opacity: 0;
+    animation: popupFadeIn 0.3s ease forwards;
+}
+
+
+
+@keyframes popupFadeIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    color: #ff4f4f;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
