@@ -234,6 +234,20 @@ body.projects-page {
 
 }
 
+/* Style for placeholder text when a project demo is coming soon */
+.coming-soon {
+    color: #aaa;
+    font-style: italic;
+    margin-right: 15px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.coming-soon:hover {
+    opacity: 1;
+}
+
+
 /* --------------------------------------- */
 /* Contact Popup Styles                 */
 /* --------------------------------------- */
