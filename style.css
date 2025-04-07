@@ -1,42 +1,117 @@
 /* HOMEPAGE STYLES */
-body {
+body.homepage {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    /* Keep content top-aligned but centered horizontally */
-    background: radial-gradient(circle, #111 0%, #000 100%);
+    align-items: center;
+    background-color: #000;
     color: #00ffe1;
+    overflow-x: hidden;
+    position: relative;
 }
 
+body.homepage::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 160%;
+    height: 160%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0, 255, 225, 0.45) 0%, transparent 80%);
+    z-index: -1;
+    animation: pulseGlow 4s ease-in-out infinite;
+    opacity: 0.6;
+    filter: blur(120px);
+    pointer-events: none;
+}
 
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+@keyframes hitchcockZoom {
+    0% {
+        opacity: 0;
+        transform: scale(2.5) translateY(-100px);
+        text-shadow: none;
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-10px);
+        text-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Add this */
     text-align: center;
     padding: 40px;
     max-width: 600px;
+    margin: 0 auto;
 }
+
 
 .hero-title {
     font-size: clamp(2.5rem, 6vw, 4rem);
     margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
     white-space: nowrap;
+    opacity: 0;
+    animation: hitchcockZoom 2.4s ease-out 0.3s forwards;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 .hero-subtitle {
     font-size: 1.3rem;
     color: #ccc;
     margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 1.2s forwards;
 }
 
 .hero-nav {
     display: flex;
     justify-content: center;
     gap: 20px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 2s forwards;
 }
 
 .nav-btn {
@@ -64,111 +139,6 @@ body {
     padding-bottom: 80px;
 }
 
-
-/* -------------------------------------------------- */
-/*  Task Widget Styles - Embedded Component         */
-/* -------------------------------------------------- */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-.task-widget {
-    background-color: #1a1a1a;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    width: 100%;
-    max-width: 400px;
-    margin: 80px auto 0 auto;
-    /* Top spacing added */
-}
-
-
-#task-form {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-#task-input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #2a2a2a;
-    color: #eaeaea;
-}
-
-#task-input::placeholder {
-    color: #888;
-}
-
-#task-form button {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #00ffe1;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#task-form button:hover {
-    background-color: #00d9c1;
-}
-
-#task-list {
-    margin-top: 20px;
-    list-style: none;
-}
-
-#task-list li {
-    background-color: #2a2a2a;
-    margin-bottom: 10px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #eaeaea;
-}
-
-#task-list li.done {
-    text-decoration: line-through;
-    opacity: 0.8;
-    color: #ff4f4f;
-}
-
-.delete-btn {
-    margin-left: 10px;
-    cursor: pointer;
-    color: #ff4f4f;
-    font-size: 1.1rem;
-}
-
-.delete-btn:hover {
-    color: #ff1a1a;
-}
-
-.page-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.center-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
 
 /* -------- Project Page Styles -------- */
 
@@ -234,7 +204,6 @@ body.projects-page {
 
 }
 
-/* Style for placeholder text when a project demo is coming soon */
 .coming-soon {
     color: #aaa;
     font-style: italic;
@@ -325,4 +294,24 @@ body.projects-page {
     color: #ff4f4f;
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+.intro-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: zoomInCenter 1.8s ease-out;
+}
+
+@keyframes zoomInCenter {
+    0% {
+        transform: scale(2) translateY(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
 }
