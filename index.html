@@ -15,6 +15,9 @@
                 <h1 class="hero-title">Jeremy Tarkington</h1>
                 <p class="hero-subtitle">AI Developer · Automation Architect · Full Stack Strategist</p>
             </div>
+            <div class="news-ticker" id="news-ticker">
+                <span>Loading latest tech news...</span>
+            </div>
 
             <nav class="hero-nav">
 
@@ -22,6 +25,24 @@
                 <a href="projects.html" class="nav-btn">Projects</a>
                 <a href="contact.html" class="nav-btn">Contact</a>
             </nav>
+
+            <div class="ai-console-wrapper">
+                <div class="ai-console">
+                    <div class="console-header">AI Assistant Console</div>
+                    <div class="response-style">
+                        <label>Response Style:</label>
+                        <select id="tone-select">
+                            <option value="serious">Serious</option>
+                            <option value="funny">Funny</option>
+                            <option value="sarcastic">Sarcastic</option>
+                            <option value="friendly">Friendly</option>
+                        </select>
+                    </div>
+                    <div id="chat-log" class="chat-log"></div>
+                    <input type="text" id="user-input" placeholder="Ask me anything..." />
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
@@ -46,6 +67,73 @@
                 });
             </script>
 
+            <script>
+                async function fetchMultipleFeeds() {
+                    const feeds = [
+                        "https://hnrss.org/newest",
+                        "https://www.wired.com/feed/rss",
+                        "https://feeds.feedburner.com/TechCrunch/",
+                        "https://www.theverge.com/rss/index.xml",
+                        "http://feeds.arstechnica.com/arstechnica/index"
+                    ];
+
+                    const headlines = [];
+
+                    for (const url of feeds) {
+                        try {
+                            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
+                            const data = await response.json();
+
+                            if (data.items) {
+                                const titles = data.items
+                                    .slice(0, 5)
+                                    .map(item => `<a href="${item.link}" target="_blank">${item.title}</a>`);
+                                headlines.push(...titles);
+                            }
+                        } catch (error) {
+                            console.warn(`Failed to fetch feed: ${url}`, error);
+                        }
+                    }
+
+                    const ticker = document.getElementById("news-ticker");
+                    if (headlines.length) {
+                        headlines.sort(() => Math.random() - 0.5);
+                        const scrollText = headlines.join(" ⬩ ");
+                        ticker.innerHTML = `<span>${scrollText}</span>`;
+                    } else {
+                        ticker.innerHTML = "<span>Unable to load news at the moment.</span>";
+                    }
+                }
+
+                fetchMultipleFeeds(); 
+            </script>
+
+            <script>
+                async function sendMessage() {
+                    const input = document.getElementById("user-input").value;
+                    const tone = document.getElementById("tone-select").value;
+                    const chatLog = document.getElementById("chat-log");
+
+                    if (!input.trim()) return;
+
+                    chatLog.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+
+                    try {
+                        const res = await fetch('/.netlify/functions/ai-chat', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ message: input, tone: tone })
+                        });
+
+                        const data = await res.json();
+                        chatLog.innerHTML += `<p><strong>AI:</strong> ${data.reply}</p>`;
+                    } catch (err) {
+                        chatLog.innerHTML += `<p><strong>AI:</strong> Error: ${err.message}</p>`;
+                    }
+
+                    document.getElementById("user-input").value = "";
+                }
+            </script>
 
             <div id="contact-popup" class="popup-overlay">
                 <div class="popup-card">
