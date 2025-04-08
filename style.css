@@ -216,10 +216,6 @@ body.projects-page {
     opacity: 1;
 }
 
-
-/* --------------------------------------- */
-/* Contact Popup Styles                 */
-/* --------------------------------------- */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -272,13 +268,10 @@ body.projects-page {
 }
 
 .popup-card {
-    /* existing styles... */
     transform: scale(0.95);
     opacity: 0;
     animation: popupFadeIn 0.3s ease forwards;
 }
-
-
 
 @keyframes popupFadeIn {
     to {

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>About Me – Jeremy Tarkington</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #001f1c;
+            font-family: 'Courier New', monospace;
+            color: #00ffe1;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .boot-text {
+            font-size: 1.2rem;
+            color: #0ff;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #0ff;
+            width: 0;
+            animation: typing 3.2s steps(40, end) forwards, blink 0.7s step-end infinite;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 32ch;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .container {
+            opacity: 0;
+            max-width: 900px;
+            padding: 40px;
+            text-align: center;
+            z-index: 2;
+            animation: fadeIn 1.8s ease 3.6s forwards;
+        }
+
+        .glow-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: radial-gradient(circle, rgba(0, 255, 225, 0.4) 0%, transparent 80%);
+            filter: blur(80px);
+            animation: expandGlow 2s ease-out 3.2s forwards;
+            z-index: 1;
+        }
+
+        @keyframes expandGlow {
+            to {
+                transform: translate(-50%, -50%) scale(10);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px #00ffe1;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h3 {
+            font-weight: 400;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #cceeee;
+        }
+
+        .glow-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .glow-list li {
+            background: rgba(0, 255, 225, 0.05);
+            padding: 12px 20px;
+            margin: 12px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            color: #eee;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .glow-list li:hover {
+            background: rgba(0, 255, 225, 0.12);
+            box-shadow: 0 0 12px #00ffe1;
+            color: #00ffe1;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #002926;
+            border: 1px solid #00ffe1;
+            padding: 18px 26px;
+            color: #ffffff;
+            font-size: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px #00ffe1;
+            display: none;
+            z-index: 999;
+            animation: fadeInUp 0.4s ease-out forwards;
+            max-width: 400px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boot-text" id="boot-text">Initializing system: About Me...</div>
+    <div class="glow-ring"></div>
+
+    <div class="container" id="main-container">
+        <h1>Jeremy Tarkington</h1>
+        <h3>AI Developer · Automation Architect · Full Stack Strategist</h3>
+
+        <p>
+            I’m a Full Stack Developer with a relentless drive to craft intelligent, clean, and purpose-driven
+            applications that deliver real value. I bring a hands-on, execution-focused mindset to every build—whether
+            front-end, back-end, or a full system stack—always aiming for results that go beyond expectation.
+        </p>
+        <p>
+            I engineer scalable, interactive web experiences that merge intuitive design with powerful functionality.
+            From dynamic user interfaces to optimized database structures, I’m committed to building complete solutions
+            that are fast, secure, and maintainable.
+        </p>
+        <p>
+            My true passion lies in fusing traditional development with modern AI. I work with tools like OpenAI APIs,
+            LangChain, Hugging Face models, and LLM-powered automations to create smarter systems that learn, adapt, and
+            streamline workflows. I build with both purpose and precision—leveraging Python, JavaScript, and cloud-based
+            integrations to unlock AI’s full potential in real applications.
+        </p>
+        <p>
+            I don’t just build apps—I build tools people rely on. Whether it’s a productivity dashboard, a real-time
+            analytics panel, or an AI-integrated task manager, I focus on practical innovation and frictionless
+            performance.
+        </p>
+
+        <ul class="glow-list">
+            <li
+                onclick="showPopup('Deep experience with JavaScript, Python, Node, Express, React, and modern SQL/NoSQL databases. My builds are componentized, API-connected, and optimized for deployment.')">
+                <strong>Full Stack Development</strong>
+            </li>
+            <li
+                onclick="showPopup('Integration of OpenAI, LangChain, Hugging Face Transformers, and custom automation using Python/JavaScript. I design AI features that feel intuitive—and work when it counts.')">
+                <strong>AI-Driven Applications</strong>
+            </li>
+            <li
+                onclick="showPopup('Everything I build is live, functional, and tested. I ship to GitHub, Netlify, and production environments with version control, deployment pipelines, and real users in mind.')">
+                <strong>Real-World Projects</strong>
+            </li>
+            <li
+                onclick="showPopup('My code is modular, readable, and scalable. I obsess over clean UI, smooth UX, and maintainable architecture that can evolve as needs grow.')">
+                <strong>Commitment to Quality</strong>
+            </li>
+        </ul>
+    </div>
+
+    <div id="popup" class="popup"></div>
+
+    <script>
+        const popup = document.getElementById("popup");
+        let popupTimeout;
+
+        setTimeout(() => {
+            document.getElementById("boot-text").style.display = "none";
+        }, 3600);
+
+        function showPopup(message) {
+            popup.textContent = message;
+            popup.style.display = "block";
+
+            clearTimeout(popupTimeout);
+            popupTimeout = setTimeout(() => {
+                popup.style.display = "none";
+            }, 15000);
+        }
+    </script>
+</body>
+
+</html>

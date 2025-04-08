@@ -30,15 +30,14 @@
                     const closeBtn = document.getElementById("close-popup");
 
                     contactBtn.addEventListener("click", function (e) {
-                        e.preventDefault(); // Prevent navigation
-                        popup.style.display = "flex"; // Show popup
+                        e.preventDefault();
+                        popup.style.display = "flex";
                     });
 
                     closeBtn.addEventListener("click", function () {
-                        popup.style.display = "none"; // Hide popup
+                        popup.style.display = "none";
                     });
 
-                    // Optional: Hide popup when clicking outside of card
                     popup.addEventListener("click", function (e) {
                         if (e.target === popup) {
                             popup.style.display = "none";
@@ -54,7 +53,8 @@
                     <h3>Contact Me</h3>
                     <p>Email: <a href="mailto:jtarkington.dev@gmail.com">jtarkington.dev@gmail.com</a></p>
                     <p>GitHub: <a href="https://github.com/jtarkington-dev" target="_blank">jtarkington-dev</a></p>
-                    <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn</a></p> <!-- Update later -->
+                    <p>LinkedIn: <a href="https://www.linkedin.com/in/jeremy-tarkington-2bb82a35a/"
+                            target="_blank">LinkedIn</a></p>
                     <p>Phone: <a href="tel:3375158618">337-515-8618</a></p>
                 </div>
             </div>
