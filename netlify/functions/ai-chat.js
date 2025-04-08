@@ -31,7 +31,11 @@ exports.handler = async function (event) {
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: error.message, stack: error.stack })
+            body: JSON.stringify({
+                error: error.message,
+                stack: error.stack,
+                envKey: process.env.OPENROUTER_API_KEY ? "✅ Key exists" : "❌ Key missing"
+            })
         };
     }
 }
