@@ -1,6 +1,5 @@
 exports.handler = async function (event) {
     const { message, tone } = JSON.parse(event.body);
-
     const prompt = `Respond in a ${tone} tone. User says: "${message}"`;
 
     try {
@@ -10,9 +9,10 @@ exports.handler = async function (event) {
                 'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
                 'Content-Type': 'application/json',
                 'HTTP-Referer': 'https://jeremy-dev.netlify.app',
+                'X-Title': 'Jeremy Dev Portfolio'
             },
             body: JSON.stringify({
-                model: 'deepseek-chat',
+                model: 'deepseek/deepseek-chat',
                 messages: [
                     { role: 'system', content: 'You are a helpful AI assistant.' },
                     { role: 'user', content: prompt }
@@ -38,4 +38,4 @@ exports.handler = async function (event) {
             })
         };
     }
-}
+};
