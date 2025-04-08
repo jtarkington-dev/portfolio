@@ -1,4 +1,4 @@
-export async function handler(event) {
+exports.handler = async function (event) {
     const { message, tone } = JSON.parse(event.body);
 
     const prompt = `Respond in a ${tone} tone. User says: "${message}"`;
