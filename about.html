@@ -20,6 +20,8 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative;
+            transition: background-color 0.4s ease;
         }
 
         .boot-text {
@@ -53,15 +55,6 @@
             }
         }
 
-        .container {
-            opacity: 0;
-            max-width: 900px;
-            padding: 40px;
-            text-align: center;
-            z-index: 2;
-            animation: fadeIn 1.8s ease 3.6s forwards;
-        }
-
         .glow-ring {
             position: absolute;
             top: 50%;
@@ -81,6 +74,15 @@
                 transform: translate(-50%, -50%) scale(10);
                 opacity: 0.8;
             }
+        }
+
+        .container {
+            opacity: 0;
+            max-width: 900px;
+            padding: 40px;
+            text-align: center;
+            z-index: 2;
+            animation: fadeIn 1.8s ease 3.6s forwards;
         }
 
         @keyframes fadeIn {
@@ -146,22 +148,47 @@
             box-shadow: 0 0 20px #00ffe1;
             display: none;
             z-index: 999;
-            animation: fadeInUp 0.4s ease-out forwards;
             max-width: 400px;
             line-height: 1.6;
             text-align: center;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -40%);
-            }
+        .orb-panel {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 5;
+        }
 
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
+        .orb {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #00ffe1;
+            box-shadow: 0 0 12px #00ffe1;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+
+        .orb:hover {
+            transform: scale(1.2);
+        }
+
+        .orb::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ffe1;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -198,43 +225,116 @@
 
         <ul class="glow-list">
             <li
-                onclick="showPopup('Deep experience with JavaScript, Python, Node, Express, React, and modern SQL/NoSQL databases. My builds are componentized, API-connected, and optimized for deployment.')">
+                onclick="setTheme('blue'); showPopup('Deep experience with JavaScript, Python, Node, Express, React, and modern SQL/NoSQL databases. My builds are componentized, API-connected, and optimized for deployment.')">
                 <strong>Full Stack Development</strong>
             </li>
             <li
-                onclick="showPopup('Integration of OpenAI, LangChain, Hugging Face Transformers, and custom automation using Python/JavaScript. I design AI features that feel intuitive—and work when it counts.')">
+                onclick="setTheme('purple'); showPopup('Integration of OpenAI, LangChain, Hugging Face Transformers, and custom automation using Python/JavaScript. I design AI features that feel intuitive—and work when it counts.')">
                 <strong>AI-Driven Applications</strong>
             </li>
             <li
-                onclick="showPopup('Everything I build is live, functional, and tested. I ship to GitHub, Netlify, and production environments with version control, deployment pipelines, and real users in mind.')">
+                onclick="setTheme('teal'); showPopup('Everything I build is live, functional, and tested. I ship to GitHub, Netlify, and production environments with version control, deployment pipelines, and real users in mind.')">
                 <strong>Real-World Projects</strong>
             </li>
             <li
-                onclick="showPopup('My code is modular, readable, and scalable. I obsess over clean UI, smooth UX, and maintainable architecture that can evolve as needs grow.')">
+                onclick="setTheme('red'); showPopup('My code is modular, readable, and scalable. I obsess over clean UI, smooth UX, and maintainable architecture that can evolve as needs grow.')">
                 <strong>Commitment to Quality</strong>
             </li>
         </ul>
+    </div>
+
+    <div class="orb-panel">
+        <div class="orb" data-label="Python" onclick="showLang('Python')"></div>
+        <div class="orb" data-label="Java" onclick="showLang('Java')"></div>
+        <div class="orb" data-label="JavaScript" onclick="showLang('JavaScript')"></div>
+        <div class="orb" data-label="HTML" onclick="showLang('HTML')"></div>
+        <div class="orb" data-label="CSS" onclick="showLang('CSS')"></div>
+        <div class="orb" data-label="Node.js" onclick="showLang('Node.js')"></div>
+        <div class="orb" data-label="C#" onclick="showLang('C#')"></div>
+        <div class="orb" data-label="SQL" onclick="showLang('SQL')"></div>
+        <div class="orb" data-label="Bash" onclick="showLang('Bash')"></div>
+        <div class="orb" data-label="TypeScript" onclick="showLang('TypeScript')"></div>
+        <div class="orb" data-label="C++" onclick="showLang('C++')"></div>
     </div>
 
     <div id="popup" class="popup"></div>
 
     <script>
         const popup = document.getElementById("popup");
+        const body = document.body;
         let popupTimeout;
 
-        setTimeout(() => {
-            document.getElementById("boot-text").style.display = "none";
-        }, 3600);
+        const langs = {
+            "Python": "Hi, I’m Python. Born in 1991, I’m beloved for my simplicity and readability. I power everything from AI and automation to data science and web development.",
+            "Java": "Hello, I’m Java. Released in 1995, I’m built for portability and speed. I run on everything—from enterprise software to Android apps.",
+            "JavaScript": "Hey there! I’m JavaScript, the language of the web. I started in browsers, now I’m everywhere—front-end, back-end, even IoT.",
+            "HTML": "Hi! I’m HTML. I structure every webpage you see. I’ve been the backbone of the internet since 1993.",
+            "CSS": "I’m CSS, the style master. I make websites look sharp, clean, and responsive—fonts, colors, layouts—it’s all me.",
+            "Node.js": "I’m Node.js. I take JavaScript to the server. From APIs to real-time systems, I handle heavy backend work efficiently.",
+            "C#": "Greetings, I’m C#. I thrive in game dev, Windows apps, and enterprise software. I’m powerful and polished, thanks to Microsoft.",
+            "SQL": "I’m SQL. I speak database. Whether it’s MySQL, Postgres, or SQLite—I help apps find, filter, and store data.",
+            "Bash": "I’m Bash. I script the shell and automate everything from server management to system boot routines.",
+            "TypeScript": "I’m TypeScript—JavaScript with brains. I bring type safety, better tooling, and cleaner code for big projects.",
+            "C++": "Call me C++. Fast, low-level, and battle-tested. I run games, operating systems, and anything needing raw speed."
+        };
+
+        function showLang(lang) {
+            resetTheme();
+            popup.textContent = "";
+            popup.style.display = "block";
+            let text = langs[lang];
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    popup.textContent += text[i++];
+                    setTimeout(type, 20);
+                }
+            }
+            clearTimeout(popupTimeout);
+            popupTimeout = setTimeout(() => {
+                popup.style.display = "none";
+                resetTheme();
+            }, 12000);
+            type();
+        }
 
         function showPopup(message) {
             popup.textContent = message;
             popup.style.display = "block";
-
             clearTimeout(popupTimeout);
             popupTimeout = setTimeout(() => {
                 popup.style.display = "none";
-            }, 15000);
+                resetTheme();
+            }, 10000);
         }
+
+        function setTheme(color) {
+            const themes = {
+                blue: "#001f3f",
+                purple: "#2e003e",
+                teal: "#003e3e",
+                red: "#3e0000"
+            };
+            const glow = {
+                blue: "#00aaff",
+                purple: "#cc66ff",
+                teal: "#00ffee",
+                red: "#ff3333"
+            };
+            body.style.backgroundColor = themes[color] || "#001f1c";
+            popup.style.border = `1px solid ${glow[color] || "#00ffe1"}`;
+            popup.style.boxShadow = `0 0 20px ${glow[color] || "#00ffe1"}`;
+        }
+
+        function resetTheme() {
+            body.style.backgroundColor = "#001f1c";
+            popup.style.border = "1px solid #00ffe1";
+            popup.style.boxShadow = "0 0 20px #00ffe1";
+        }
+
+        setTimeout(() => {
+            document.getElementById("boot-text").style.display = "none";
+        }, 3600);
     </script>
 </body>
 
